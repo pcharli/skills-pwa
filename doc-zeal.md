@@ -87,3 +87,7 @@
 	- **2 APIs** : Push & Notifications
 ### Notifications
 - Zeal => Notification -> exemple pour demander l'autorisation. **Ne se fait pas dans sw.js**
+
+### Push
+- Zeal => "notificationclick/notificationclose" => exemple de gestion d'une notification dans SW
+- Zeal => "ServiceWorkerRegistration.show" pour afficher une notification via sw
