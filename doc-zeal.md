@@ -7,11 +7,13 @@
 
 ## index
 - code html
-- link vers manifest in head
+- link vers manifest in head avec `rel="manifest"`
 - link vers script js
 - `<meta name="theme-color" content="#B12A34">` dans head
+- `<link rel="icon" href="/favicon.ico">` dans head
 
 ## manifest
+- rien trouvé dans Zeal, hélas
 - objet json minimum :
 
 `{
@@ -58,6 +60,11 @@
             "src": "icons/icon-512.png",
             "sizes": "512x512",
             "type": "image/png"
+        },
+        {
+            "src": "icons/hd_hi.svg",
+            "sizes": "any",
+			"purpose": "maskable"
         }
     ],
     "start_url": "index.html",
@@ -65,3 +72,13 @@
     "theme_color": "#B12A34",
     "background_color": "#B12A34"
 }`
+- display peut être sur fullscreen, standalone, browser
+- purpose au moins maskable sur une icône pour éviter une notice dans Chrome
+
+## javascript
+- Zeal => "serviceWorker" => exemple de déclaration
+- Dès que manifest + déclaration du SW, application installable
+
+## fichier service worker (JS)
+- nécessaire pour mise en cache
+- nécessaire pour notifications
