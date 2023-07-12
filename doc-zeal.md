@@ -77,8 +77,13 @@
 
 ## javascript
 - Zeal => "serviceWorker" => exemple de déclaration
+- Zeal => "serviceWorker" => "using service Workers" => autre exemple de déclaration
 - Dès que manifest + déclaration du SW, application installable
 
 ## fichier service worker (JS)
 - nécessaire pour mise en cache
+	- Zeal => "serviceWorker" => "using service Workers" => exempe de mise en cache
 - nécessaire pour notifications
+	- **2 APIs** : Push & Notifications
+### Notifications
+- Zeal => Notification -> exemple pour demander l'autorisation. **Ne se fait pas dans sw.js**
