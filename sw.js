@@ -35,3 +35,34 @@ const cacheFirst = async (request) => {
 self.addEventListener("fetch", (event) => {
   event.respondWith(cacheFirst(event.request));
 });
+
+// add push
+self.addEventListener("push", (event) => {
+  if (!(self.Notification && self.Notification.permission === "granted")) {
+    return;
+  }
+console.log('test')
+  const data = event.data?.json() ?? {};
+  const title = data.title || "Something Has Happened";
+  const url = data.url || "http://formation-cepegra.be"
+  const message =
+    data.message || "Here's something you might want to check out.";
+  const icon = "icons/favicon-16x16.png";
+
+  //erreur dans Zeal qui utilise self.Notification
+  const notification = registration.showNotification(title, {
+    body: message,
+    tag: "simple-push-demo-notification",
+    icon,
+  });
+
+  //idem zeal affiche l'event quand notification générée par le script du navigateur
+  self.addEventListener('notificationclick', function(event) {
+    event.notification.close(); // Ferme la notification
+  
+    event.waitUntil(
+      clients.openWindow(url) // Redirige vers l'URL spécifiée
+    );
+  });
+  
+});

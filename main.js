@@ -37,9 +37,11 @@ if ("serviceWorker" in navigator) {
     const notifTitle = "Titre de notif";
     const notifBody = 'Créé par Pierre.';
     const notifImg = 'icons/favicon-16x16.png';
+    const vibrations = [200, 100, 200, 100, 200, 100, 200];
     const options = {
         body: notifBody,
-        icon: notifImg
+        icon: notifImg,
+        vibrate: vibrations
     }
     if (!("Notification" in window)) {
       // Check if the browser supports notifications
