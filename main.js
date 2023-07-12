@@ -34,20 +34,27 @@ if ("serviceWorker" in navigator) {
 
   //add notifications
   function notifyMe() {
+    const notifTitle = "Titre de notif";
+    const notifBody = 'Créé par Pierre.';
+    const notifImg = 'icons/favicon-16x16.png';
+    const options = {
+        body: notifBody,
+        icon: notifImg
+    }
     if (!("Notification" in window)) {
       // Check if the browser supports notifications
       alert("This browser does not support desktop notification");
     } else if (Notification.permission === "granted") {
       // Check whether notification permissions have already been granted;
       // if so, create a notification
-      const notification = new Notification("Hi there!");
+      const notification = new Notification("Hi there!", options);
       // …
     } else  {
       // We need to ask the user for permission
       Notification.requestPermission().then((permission) => {
         // If the user accepts, let's create a notification
         if (permission === "granted") {
-          const notification = new Notification("Hi there!");
+          const notification = new Notification("Hi there!", options);
           // …
         }
       });
@@ -60,6 +67,11 @@ if ("serviceWorker" in navigator) {
   if (Notification.permission !== "granted") {
     if (confirm('Recevoir notifications ?')) {
       notifyMe()
+      //randomNotification()
     }
   }
-  
+
+  document.querySelector('.notification').addEventListener('click', e=> {
+    e.preventDefault()
+    notifyMe()
+  })
