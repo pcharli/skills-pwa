@@ -9,7 +9,8 @@ const appShellFiles = [
   '/icons/favicon-32x32.png',
   '/icons/favicon-16x16.png',
   '/icons/favicon-96x96.png',
-  '/icons/favicon-256x256.png'
+  '/icons/favicon-256x256.png',
+  'https://api.punkapi.com/v2/beers/random'
 ];
 //mise en cache
 const addResourcesToCache = async (resources) => {
@@ -25,16 +26,35 @@ self.addEventListener("install", (event) => {
 
 //mise en cache et priorité au cache
 const cacheFirst = async (request) => {
-  const responseFromCache = await caches.match(request);
-  if (responseFromCache) {
-    return responseFromCache;
-  }
-  return fetch(request);
-};
+  const responseFromCache = await caches.match(request)
+    return responseFromCache
+}
+
+const networkFirst = async (request) => {
+  const response = await fetch(request).catch(function() {
+    return caches.match(request)
+})
+    return response
+}
 
 self.addEventListener("fetch", (event) => {
-  event.respondWith(cacheFirst(event.request));
+  if(!event.request.url.includes("/v2/")) {
+    event.respondWith(cacheFirst(event.request))
+  }
+  else {
+    event.respondWith(networkFirst(event.request))
+  }
 });
+
+function update(request) {
+  console.log('update')
+  return fetch(request.url).then(
+    response =>
+      caches(request, response) // on peut mettre en cache la réponse
+        .then(() => response) // résout la promesse avec l'objet Response
+  );
+}
+
 
 // add push
 self.addEventListener("push", (event) => {

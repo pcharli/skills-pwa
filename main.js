@@ -77,3 +77,11 @@ if ("serviceWorker" in navigator) {
     e.preventDefault()
     notifyMe()
   })
+
+  //test ajax
+  fetch('https://api.punkapi.com/v2/beers/random')
+  .then(r => r.json())
+  .then(r => {
+    console.log(r)
+    document.querySelector('.beerID').innerText = r[0].id
+  })
