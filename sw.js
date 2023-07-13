@@ -1,3 +1,11 @@
+//https://www.educative.io/answers/5-service-worker-caching-strategies-for-your-next-pwa-app
+//https://pwa-workshop.js.org/fr/5-pwa-install/#ajout-d-un-invite-d-installation
+//https://developer.mozilla.org/fr/docs/Web/Progressive_web_apps/Tutorials/js13kGames/Offline_Service_workers
+
+//https://github.com/mdn/translated-content/blob/main/files/fr/web/progressive_web_apps/tutorials/js13kgames/re-engageable_notifications_push/index.md
+
+//https://github.com/mdn/pwa-examples
+
 const cacheName = 'demo-v1';
 const appShellFiles = [
   '/',
@@ -24,19 +32,20 @@ self.addEventListener("install", (event) => {
   );
 });
 
-//mise en cache et priorité au cache
+//Priorité au cache
 const cacheFirst = async (request) => {
   const responseFromCache = await caches.match(request)
     return responseFromCache
 }
 
+//Priorité au réseau
 const networkFirst = async (request) => {
   const response = await fetch(request).catch(function() {
     return caches.match(request)
 })
     return response
 }
-
+// si on cherche un ressource
 self.addEventListener("fetch", (event) => {
   if(!event.request.url.includes("/v2/")) {
     event.respondWith(cacheFirst(event.request))

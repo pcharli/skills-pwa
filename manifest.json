@@ -28,5 +28,6 @@
     "display": "fullscreen",
     "theme_color": "#B12A34",
     "background_color": "#B12A34",
-    "gcm_sender_id": "1023166176114"
+    "gcm_sender_id": "1023166176114",
+    "prefer_related_applications": false
 }
